@@ -3,7 +3,7 @@ import logo from "../assets/images/spacex-logo.svg";
 
 const Navbar = ({ pathname }: { pathname: string }) => {
   return (
-    <nav className="mb-5 flex justify-between w-full sticky">
+    <nav className="mb-5 flex justify-between w-full absolute">
       <Link to="/" aria-label="Go to home page">
         <img src={logo} className="h-24" alt="Space X Logo" />
       </Link>
