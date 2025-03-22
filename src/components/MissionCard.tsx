@@ -32,7 +32,9 @@ const MissionCard = ({ mission }: MissionCardProps) => {
         </p>
         <p className="my-4 block font-sans md:text-md md:font-medium leading-snug tracking-normal text-gray-700 antialiased">
           {details
-            ? details.slice(0, charLimit) + "..."
+            ? details.length < charLimit
+              ? details
+              : details.slice(0, charLimit) + "..."
             : "No details available"}
         </p>
         <Link
