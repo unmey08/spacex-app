@@ -9,7 +9,7 @@ const MissionCard = ({ mission }: MissionCardProps) => {
   const charLimit = isMobile ? 75 : 200;
   const { details } = mission;
   return (
-    <div className="rounded-lg my-5 relative w-full bg-clip-border shadow-md border-2 overflow-hidden border-gray-200 md:flex md:h-72 lg:h-96">
+    <div className="rounded-lg my-10 relative w-full bg-clip-border shadow-xl shadow-gray-300 border overflow-hidden border-gray-400 md:flex md:h-72 lg:h-96">
       <div className="relative m-0 md:w-2/5 shrink-0 rounded-lg rounded-r-none bg-clip-border h-80 md:h-full">
         <img
           src={mission.image.src}

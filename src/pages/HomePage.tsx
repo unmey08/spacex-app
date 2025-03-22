@@ -1,33 +1,34 @@
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
-import Hero from "../components/Hero";
+import { MouseEvent, Ref } from "react";
 import { MissionState } from "../App";
 import Filters from "../components/Filters";
 import SortButton from "../components/SortButton";
 import MissionList from "../components/MissionList";
+import Hero from "../components/Hero";
 
 type HomePageProps = {
   launchData: MissionState[];
-  lastElementRef: HTMLDivElement | null;
+  lastElementRef: Ref<HTMLDivElement> | null;
+  missionListRef: Ref<HTMLDivElement> | null;
+  handleYearSort: () => void;
+  sortDirection: string;
+  onSearch: (value: string) => void;
+  searchText: string;
+  filter: boolean;
 };
 
-export type YearsListState = {
-  id: string;
-  year: string;
-  checked: boolean;
-};
-
-export type RocketListState = {
-  id: string;
-  rocket: string;
-  checked: boolean;
-};
-
-const HomePage = ({ launchData, lastElementRef }: HomePageProps) => {
-  const missionListRef = useRef<HTMLDivElement | null>(null);
-
+const HomePage = ({
+  launchData,
+  lastElementRef,
+  missionListRef,
+  handleYearSort,
+  sortDirection,
+  onSearch,
+  searchText,
+  filter,
+}: HomePageProps) => {
   const scrollIntoView = (event?: MouseEvent) => {
     event?.preventDefault();
-    missionListRef.current?.scrollIntoView({
+    missionListRef?.current?.scrollIntoView({
       behavior: "smooth",
     });
   };
@@ -36,7 +37,18 @@ const HomePage = ({ launchData, lastElementRef }: HomePageProps) => {
     <div>
       <Hero scrollIntoView={scrollIntoView} />
       <section ref={missionListRef}>
-        <MissionList launchData={launchData} lastElementRef={lastElementRef} />
+        <div className="md:flex justify-between">
+          <Filters onSearch={onSearch} searchText={searchText} />
+          <SortButton
+            handleYearSort={handleYearSort}
+            sortDirection={sortDirection}
+          />
+        </div>
+        <MissionList
+          launchData={launchData}
+          lastElementRef={lastElementRef}
+          filter={filter}
+        />
       </section>
     </div>
   );

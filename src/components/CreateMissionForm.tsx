@@ -57,7 +57,11 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
   //   reset();
   // };
 
-  const year = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
+  const yearsDropdown: string[] = Array.from(
+    { length: currentYear - 2002 + 1 },
+    (_, i) => (2002 + i).toString()
+  );
 
   return (
     <div className="w-full h-full">
@@ -73,7 +77,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
           autoComplete="false"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="my-1 md:my-2">
+          <div className="my-2">
             <label
               htmlFor="missionName"
               className="block text-sm after:content-['*'] font-bold"
@@ -93,7 +97,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     return true;
                   },
                 })}
-                className={`border border-gray-200 md:my-2 p-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium ${
+                className={`border border-gray-400 placeholder-gray-500 md:my-2 p-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium ${
                   errors.missionName ? "border-red-400" : ""
                 }`}
               />
@@ -104,7 +108,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
               )}
             </div>
           </div>
-          <div className="my-1 md:my-2">
+          <div className="my-2">
             <label htmlFor="details" className="block text-sm font-bold">
               Mission Details
             </label>
@@ -117,7 +121,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     message: "Maximum 500 characters",
                   },
                 })}
-                className={`border border-gray-200 p-2 md:my-2 rounded-lg  w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium h-24 md:h-48 ${
+                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg  w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium h-24 md:h-48 ${
                   errors.details ? "border-red-400" : ""
                 }`}
               />
@@ -148,7 +152,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     return true;
                   },
                 })}
-                className={`border border-gray-200 p-2 md:my-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium ${
+                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium ${
                   errors.rocketName ? "border-red-400" : ""
                 }`}
               />
@@ -167,40 +171,52 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
               Launch Year
             </label>
             <div>
-              <input
-                type="text"
-                placeholder="Enter Launch Year"
+              <select
                 {...register("launchYear", {
-                  required: `Launch Year must be between year 2000 and ${year}`,
+                  required: `Launch Year must be between year 2000 and ${currentYear}`,
                   min: {
                     value: 2000,
                     message: "Launch year must be above year 2000",
                   },
                   max: {
-                    value: year,
-                    message: `Launch year must be below year ${year}`,
+                    value: currentYear,
+                    message: `Launch year must be below year ${currentYear}`,
                   },
                   minLength: {
                     value: 4,
-                    message: `Launch Year must be between year 2000 and ${year}`,
+                    message: `Launch Year must be between year 2000 and ${currentYear}`,
                   },
                   maxLength: {
                     value: 4,
-                    message: `Launch Year must be between year 2000 and ${year}`,
+                    message: `Launch Year must be between year 2000 and ${currentYear}`,
                   },
                   validate: (value) => {
                     if (value === "") {
                       return "Launch Year cannot be empty";
-                    } else if (Number(value) < 2000 && Number(value) > year) {
-                      return `Launch Year must be between year 2000 and ${year}`;
+                    } else if (
+                      Number(value) < 2000 &&
+                      Number(value) > currentYear
+                    ) {
+                      return `Launch Year must be between year 2000 and ${currentYear}`;
                     }
                     return true;
                   },
                 })}
-                className={`border border-gray-200 md:my-2 p-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium ${
+                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 ${
                   errors.launchYear ? "border-red-400" : ""
                 }`}
-              />
+                size={1}
+              >
+                <option value="Choose a year" selected>
+                  Choose a year
+                </option>
+                {yearsDropdown.map((year: string) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+
               {errors.launchYear && (
                 <p className="text-red-500 text-sm" aria-live="polite">
                   {errors.launchYear.message}

@@ -16,7 +16,7 @@ const MissionList = ({
   return (
     <div>
       {filter && (
-        <h3 className="text-md font-semibold text-gray-800 text-center">
+        <h3 className="text-md mt-10 font-semibold text-gray-800 text-center">
           Showing {launchData.length} results
         </h3>
       )}
@@ -26,17 +26,19 @@ const MissionList = ({
             <MissionCard mission={mission} key={mission.id} />
           ))}
       </div>
-      <div
-        ref={lastElementRef}
-        className="text-gray-800 font-semibold text-center"
-      >
-        <span>
+      {!filter && (
+        <div
+          ref={lastElementRef}
+          className="text-gray-800 font-semibold text-center"
+        >
+          {/* <span>
           Showing {launchData.length} missions out of{" "}
           {JSON.parse(localStorage.getItem("data") || "''").length}
-        </span>
-      </div>
+        </span> */}
+        </div>
+      )}
       {launchData.length === 0 && (
-        <p className="text-gray-800 font-semibold text-center">
+        <p className="mt-20 text-gray-800 font-semibold text-center">
           No data available
         </p>
       )}

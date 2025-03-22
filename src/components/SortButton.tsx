@@ -12,7 +12,7 @@ type SortButtonProps = {
 
 const SortButton = ({ sortDirection, handleYearSort }: SortButtonProps) => {
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end mt-5 md:mt-0 md:self-center">
       <button
         type="button"
         onClick={handleYearSort}

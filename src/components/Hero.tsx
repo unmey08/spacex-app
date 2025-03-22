@@ -1,9 +1,8 @@
 const Hero = ({ scrollIntoView }: { scrollIntoView: () => void }) => {
   return (
     <section className="h-screen w-full flex justify-center items-center">
-      <div className="bg-cover bg-center flex justify-center items-center"></div>
       <div className="space-y-5 max-w-4xl m-auto text-center">
-        <h1 className="text-sm md:text-md text-indigo-600 font-medium">
+        <h1 className="text-md md:text-md text-indigo-600 font-medium">
           Check out the different missions launched by SpaceX
         </h1>
         <h2 className="text-4xl text-gray-800 font-extrabold mx-auto md:text-7xl">
@@ -11,7 +10,7 @@ const Hero = ({ scrollIntoView }: { scrollIntoView: () => void }) => {
             SpaceX Launch Missions
           </span>
         </h2>
-        <p className="max-w-2xl mx-auto">
+        <p className="max-w-2xl mx-auto font-sans">
           SpaceX is an American space technology company headquartered at the
           Starbase development site near Brownsville, Texas. Since its founding
           in 2002, the company has made numerous advancements in rocket
@@ -21,7 +20,7 @@ const Hero = ({ scrollIntoView }: { scrollIntoView: () => void }) => {
         <div>
           <button
             type="button"
-            className=" py-2 px-4 mx-auto text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none w-sm hover:cursor-pointer"
+            className=" py-2 mx-auto text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none w-48 hover:cursor-pointer"
             onClick={scrollIntoView}
             aria-label="See missions"
           >
