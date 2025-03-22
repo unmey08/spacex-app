@@ -14,6 +14,7 @@ import {
 } from "./utils/localStorageUtils";
 import { FormFields } from "./components/CreateMissionForm";
 import { attachImages, createMissionObject } from "./utils/objectUtils";
+import MetaTagComponent from "./components/MetaTagComponent";
 
 export interface MissionState {
   mission_name: string;
@@ -186,6 +187,7 @@ function App() {
 
   return (
     <>
+      <MetaTagComponent />
       <div className="text-gray-700 absolute bottom-0 left-0 right-0 top-0 background-fade h-fit w-full bg-gray-50">
         <div className="relative max-w-full w-9/10 md:w-4/5 lg:w-3/5 mx-auto sm:px-2 md:px-4 min-h-[calc(100vh-80px)] ">
           <Navbar pathname={pathname} />

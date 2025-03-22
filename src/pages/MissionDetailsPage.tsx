@@ -15,7 +15,7 @@ const MissionDetailsPage = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="mb-24">
       {mission && (
         <section className="pt-8  md:pt-16  antialiased text-left h-[100vh]">
           <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">

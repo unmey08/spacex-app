@@ -1,54 +1,39 @@
-# React + TypeScript + Vite
+# SpaceX Launch Missions Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React application built using Vite that provides details about all SpaceX launch missions. Users can view mission details, including launch dates, mission names, and other relevant information. Additionally, users can create new mission entries.
 
-Currently, two official plugins are available:
+This application is available at https://spacex-app-five.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- View details of past SpaceX launch missions.
+- Ability to add a new mission with the required details (e.g., mission name, launch date, rocket name).
+- User-friendly interface to explore SpaceX missions.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technologies Used
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **React** - Frontend library to build the UI.
+- **Vite** - Fast and modern build tool for React.
+- **TypeScript** - For type safety and development.
+- **Tailwind CSS** - For styling the app components.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone this repository to your local machine:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+   ```bash
+   git clone https://github.com/unmey08/spacex-app-challenge.git
+   ```
+
+2. Navigate into the project directory and install the required dependencies:
+
+   ```bash
+   cd spacex-app-challenge
+   npm install
+   ```
+
+3. Run the project
+
+   ```bash
+   npm run dev
+   ```
