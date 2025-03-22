@@ -37,3 +37,13 @@ This application is available at https://spacex-app-five.vercel.app/
    ```bash
    npm run dev
    ```
+
+## Usage Guide
+
+On the homepage, you can view a list of all SpaceX launch missions.
+
+The details of each mission include the mission name, launch year, and rocket type.
+
+You can also add a new mission by filling out a form with the mission's name, launch date, rocket type, and details about the mission.
+
+After adding a mission, the new mission will be displayed in the list of launches.
