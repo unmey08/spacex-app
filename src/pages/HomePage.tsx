@@ -1,4 +1,4 @@
-import { MouseEvent, Ref } from "react";
+import { MouseEvent, RefObject } from "react";
 import { MissionState } from "../App";
 import Filters from "../components/Filters";
 import SortButton from "../components/SortButton";
@@ -7,8 +7,8 @@ import Hero from "../components/Hero";
 
 type HomePageProps = {
   launchData: MissionState[];
-  lastElementRef: Ref<HTMLDivElement> | null;
-  missionListRef: Ref<HTMLDivElement> | null;
+  lastElementRef: RefObject<HTMLDivElement | null>;
+  missionListRef: RefObject<HTMLElement | null>;
   handleYearSort: () => void;
   sortDirection: string;
   onSearch: (value: string) => void;

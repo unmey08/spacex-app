@@ -20,10 +20,12 @@ export interface MissionState {
   rocket: {
     rocket_name: string;
   };
-  image?: {
-    name: string;
-    src: string;
-  };
+  image?:
+    | {
+        name: string | undefined;
+        src: string | undefined;
+      }
+    | undefined;
   id: string;
   launch_date_utc: string;
   launch_year: string;
@@ -38,7 +40,7 @@ function App() {
   const lastElementRef = useRef<HTMLDivElement | null>(null);
   const { pathname } = useLocation();
   const [filteredList, setFilteredList] = useState<MissionState[]>([]);
-  const missionListRef = useRef<HTMLDivElement | null>(null);
+  const missionListRef = useRef<HTMLElement | null>(null);
   const [searchText, setSearchText] = useState<string>("");
 
   const [sortDirection, setSortDirection] = useState("default");

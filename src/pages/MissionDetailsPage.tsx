@@ -4,7 +4,7 @@ import { MissionState } from "../App";
 
 const MissionDetailsPage = () => {
   const { id } = useParams();
-  const [mission, setMission] = useState<Partial<MissionState>>(null);
+  const [mission, setMission] = useState<Partial<MissionState>>({});
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data") || "''");
@@ -30,8 +30,8 @@ const MissionDetailsPage = () => {
             <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
               <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
                 <img
-                  src={mission.image.src}
-                  alt={mission.image.name}
+                  src={mission?.image?.src}
+                  alt={mission?.image?.name}
                   className="h-full w-full object-cover rounded-md"
                 />
               </div>
@@ -40,7 +40,7 @@ const MissionDetailsPage = () => {
                 <div className="mt-4 ">
                   <p className="md:text-2xl font-extrabold sm:text-md">
                     Launched on{" "}
-                    {new Date(mission.launch_date_utc).toUTCString()}
+                    {new Date(mission.launch_date_utc ?? "").toUTCString()}
                   </p>
                 </div>
 

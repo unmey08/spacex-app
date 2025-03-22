@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 type FilterProps = {
   onSearch: (value: string) => void;
   searchText: string;
@@ -36,7 +38,7 @@ const Filters = ({ onSearch, searchText }: FilterProps) => {
             placeholder="Search by mission, rocket or year..."
             className="block  ps-10 text-md border text-gray-800 placeholder-gray-500 border-gray-700 my-2 p-4 rounded-lg w-full shadow-gray-200 shadow-sm bg-white"
             value={searchText}
-            onChange={(e: FormEvent<HTMLInputElement>) =>
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
               onSearch(e.target?.value)
             }
           />
