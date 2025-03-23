@@ -1,4 +1,4 @@
-import { MissionState } from "../App";
+import { MissionState } from "../common/types";
 
 export const getLocalStorageData = () => {
   return JSON.parse(localStorage.getItem("data") || "{}");

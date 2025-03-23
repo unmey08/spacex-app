@@ -37,7 +37,7 @@ const MissionList = ({
         </div>
       )}
       {totalDataLength > launchData.length ? (
-        <p className="mt-20 mb-20 text-gray-800 font-semibold text-center text-lg">
+        <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg">
           {`${
             launchData.length !== 0
               ? `Showing ${launchData.length} ${
@@ -48,12 +48,12 @@ const MissionList = ({
           }`}
         </p>
       ) : (
-        <p className="mt-20 mb-20 text-gray-800 font-semibold text-center text-lg">
+        <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg">
           That's all the missions!
         </p>
       )}
       {launchData.length === 0 && (
-        <p className="mt-20 mb-20 text-gray-800 font-semibold text-center text-lg">
+        <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg">
           No data available
         </p>
       )}
