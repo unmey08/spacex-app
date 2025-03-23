@@ -1,7 +1,9 @@
 import { MissionState } from "../common/types";
 
 export const getLocalStorageData = () => {
-  return JSON.parse(localStorage.getItem("data") || "{}");
+  return isLocalStorageDataNull()
+    ? JSON.parse(localStorage.getItem("data") || "{}")
+    : [];
 };
 
 export const setLocalStorageData = (data: MissionState[]) => {

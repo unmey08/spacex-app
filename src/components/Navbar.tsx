@@ -7,7 +7,7 @@ const Navbar = ({ pathname }: { pathname: string }) => {
       <Link to="/" aria-label="Go to home page">
         <img src={logo} className="h-24" alt="Space X Logo" />
       </Link>
-      <div className="flex">
+      <div className="flex text-xs md:text-lg">
         {pathname.includes("/missionDetails") && (
           <Link
             to={"/"}
@@ -15,7 +15,7 @@ const Navbar = ({ pathname }: { pathname: string }) => {
             aria-label="Create mission"
           >
             <button
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] hover:cursor-pointer py-2 px-4 font-medium duration-150"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] hover:cursor-pointer p-2 md:py-2 md:px-4 font-medium duration-150"
               aria-label="Back to missions list"
             >
               <span>Back to missions list</span>
@@ -29,7 +29,7 @@ const Navbar = ({ pathname }: { pathname: string }) => {
             aria-label="Create mission"
           >
             <button
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] hover:cursor-pointer py-2 px-4 font-medium duration-150 active:bg-gray-100 border border-gray-400 rounded-lg hover:shadow-md"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] hover:cursor-pointer p-2 md:py-2 md:px-4 font-medium duration-150 active:bg-gray-100 border border-gray-400 rounded-lg hover:shadow-md"
               aria-label="Create mission"
             >
               <span>Create mission</span>

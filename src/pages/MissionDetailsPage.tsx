@@ -17,7 +17,7 @@ const MissionDetailsPage = () => {
   return (
     <div className="mb-24">
       {mission && (
-        <section className="pt-8  md:pt-16  antialiased text-left h-[100vh]">
+        <section className="pt-32 antialiased text-left h-[100vh]">
           <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
             <div className="py-5 md:py-16 text-center">
               <h1 className="font-semibold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] md:py-5">
