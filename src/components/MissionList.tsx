@@ -1,6 +1,7 @@
 import MissionCard from "../components/MissionCard";
 import { MissionState } from "../common/types";
 import { Ref } from "react";
+import { getLocalStorageData } from "../utils/localStorageUtils";
 
 type MissionListProps = {
   launchData: MissionState[];
@@ -13,6 +14,7 @@ const MissionList = ({
   lastElementRef,
   filter,
 }: MissionListProps) => {
+  const totalDataLength: number = getLocalStorageData().length;
   return (
     <div>
       {filter && (
@@ -34,8 +36,24 @@ const MissionList = ({
           {""}
         </div>
       )}
+      {totalDataLength > launchData.length ? (
+        <p className="mt-20 mb-20 text-gray-800 font-semibold text-center text-lg">
+          {`${
+            launchData.length !== 0
+              ? `Showing ${launchData.length} ${
+                  filter ? "results" : "missions"
+                } out of
+          ${totalDataLength}`
+              : ""
+          }`}
+        </p>
+      ) : (
+        <p className="mt-20 mb-20 text-gray-800 font-semibold text-center text-lg">
+          That's all the missions!
+        </p>
+      )}
       {launchData.length === 0 && (
-        <p className="mt-20 text-gray-800 font-semibold text-center">
+        <p className="mt-20 mb-20 text-gray-800 font-semibold text-center text-lg">
           No data available
         </p>
       )}
