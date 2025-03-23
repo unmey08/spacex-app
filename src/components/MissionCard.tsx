@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MissionState } from "../App";
+import { MissionState } from "../common/types";
 
 type MissionCardProps = {
   mission: MissionState;

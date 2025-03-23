@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import spaceXData from "./db/payload.json";
 
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -13,28 +13,13 @@ import {
   setLocalStorageData,
 } from "./utils/localStorageUtils";
 import { FormFields } from "./components/CreateMissionForm";
-import { attachImages, createMissionObject } from "./utils/objectUtils";
+import {
+  attachImages,
+  createMissionObject,
+  getFilteredData,
+} from "./utils/objectUtils";
 import MetaTagComponent from "./components/MetaTagComponent";
-
-export interface MissionState {
-  mission_name: string;
-  rocket: {
-    rocket_name: string;
-  };
-  image?:
-    | {
-        name: string | undefined;
-        src: string | undefined;
-      }
-    | undefined;
-  id: string;
-  launch_date_utc: string;
-  launch_year: string;
-  details: string | null;
-  links: {
-    article_link: string | null;
-  };
-}
+import { MissionState } from "./common/types";
 
 function App() {
   const [launchData, setLaunchData] = useState<MissionState[]>([]);
@@ -47,16 +32,30 @@ function App() {
   const [sortDirection, setSortDirection] = useState("default");
   const [filter, setFilter] = useState<boolean>(false);
 
-  const sortMissions = (launchData: MissionState[]) => {
-    const sortedList = launchData.sort(
-      (mission1: MissionState, mission2: MissionState) => {
-        const dateA = new Date(mission1.launch_date_utc).getTime();
-        const dateB = new Date(mission2.launch_date_utc).getTime();
+  const location = useLocation();
 
-        return sortDirection === "asc" ? dateB - dateA : dateA - dateB;
-      }
+  const sortMissions = useCallback(
+    (launchData: MissionState[]) => {
+      const sortedList = launchData.sort(
+        (mission1: MissionState, mission2: MissionState) => {
+          const dateA = new Date(mission1.launch_date_utc).getTime();
+          const dateB = new Date(mission2.launch_date_utc).getTime();
+
+          return sortDirection === "asc" ? dateB - dateA : dateA - dateB;
+        }
+      );
+      return sortedList;
+    },
+    [sortDirection]
+  );
+
+  const loadMoreData = (list: MissionState[]) => {
+    const additionalData: MissionState[] = list.slice(
+      launchData.length,
+      launchData.length + 5
     );
-    return sortedList;
+    additionalData.forEach((mission) => launchData.push(mission));
+    setLaunchData([...launchData]);
   };
 
   useEffect(() => {
@@ -86,25 +85,24 @@ function App() {
         if (filter) {
           if (filteredList.length > 0) {
             if (filteredList.length > 5) {
-              const additionalData: MissionState[] = filteredList.slice(
-                launchData.length,
-                launchData.length + 5
-              );
-              additionalData.forEach((mission) => launchData.push(mission));
-              setLaunchData([...launchData]);
+              loadMoreData(filteredList);
             }
           } else {
             setLaunchData(filteredList);
           }
+        } else if (sortDirection === "asc" || sortDirection === "desc") {
+          const missionList = getLocalStorageData().sort(
+            (mission1: MissionState, mission2: MissionState) => {
+              const dateA = new Date(mission1.launch_date_utc).getTime();
+              const dateB = new Date(mission2.launch_date_utc).getTime();
+
+              return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
+            }
+          );
+          loadMoreData(missionList);
         } else {
           const missionList = getLocalStorageData();
-          const additionalData: MissionState[] = missionList.slice(
-            launchData.length,
-            launchData.length + 5
-          );
-          additionalData.forEach((mission) => launchData.push(mission));
-
-          setLaunchData([...launchData]);
+          loadMoreData(missionList);
         }
       }
     }, options);
@@ -118,41 +116,28 @@ function App() {
         observer.unobserve(lastElementRef?.current);
       }
     };
-  }, [lastElementRef]);
+  }, [lastElementRef, location, sortDirection, searchText]);
 
   const onSearch = (value: string) => {
-    const excludedColumns = [
-      "image",
-      "id",
-      "details",
-      "links",
-      "launch_date_utc",
-    ];
     if (value === "") {
-      setLaunchData(getLocalStorageData());
+      const missionList = getLocalStorageData();
+      if (sortDirection === "asc" || sortDirection === "desc") {
+        const sortedList = missionList.sort(
+          (mission1: MissionState, mission2: MissionState) => {
+            const dateA = new Date(mission1.launch_date_utc).getTime();
+            const dateB = new Date(mission2.launch_date_utc).getTime();
+
+            return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
+          }
+        );
+
+        setLaunchData(sortedList.slice(0, 5));
+      } else {
+        loadMoreData(missionList);
+      }
       setFilter(false);
     } else {
-      const filteredList = getLocalStorageData().filter(
-        (mission: MissionState) => {
-          return Object.keys(mission).some((key: string) => {
-            if (excludedColumns.includes(key)) {
-              return false;
-            } else {
-              if (key === "rocket") {
-                return mission[key].rocket_name !== null
-                  ? mission[key].rocket_name
-                      .toLowerCase()
-                      .includes(value.toLowerCase())
-                  : false;
-              } else if (key === "launch_year" || key === "mission_name") {
-                return mission[key] !== null
-                  ? mission[key].toLowerCase().includes(value.toLowerCase())
-                  : false;
-              }
-            }
-          });
-        }
-      );
+      const filteredList = getFilteredData(value);
       setLaunchData(filteredList);
       setFilteredList(filteredList);
       setFilter(true);
@@ -162,14 +147,6 @@ function App() {
 
   const handleYearSort = () => {
     let sortedList = [];
-    if (filter) {
-      sortedList = sortMissions(launchData);
-      setLaunchData(sortedList);
-    } else {
-      sortedList = sortMissions(getLocalStorageData());
-      const list = sortedList.slice(0, launchData.length);
-      setLaunchData(list);
-    }
     const direction =
       sortDirection === "default"
         ? "asc"
@@ -177,15 +154,24 @@ function App() {
         ? "desc"
         : "asc";
     setSortDirection(direction);
+    if (filter) {
+      console.log(filteredList, launchData);
+      sortedList = sortMissions(launchData);
+      setLaunchData(sortedList);
+    } else {
+      sortedList = sortMissions(getLocalStorageData());
+      const list = sortedList.slice(0, launchData.length);
+      setLaunchData(list);
+    }
   };
 
-  const submitMissionData = (data: FormFields) => {
+  const submitMissionData = useCallback((data: FormFields) => {
     const newMission = createMissionObject(data);
     const missionData = getLocalStorageData();
     missionData.push(newMission);
     setLocalStorageData(missionData);
     setLaunchData([...missionData]);
-  };
+  }, []);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Alert from "./Alert";
 
 export type FormFields = {
@@ -22,7 +22,6 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
     reset,
     formState: { errors, isValid },
   } = useForm<FormFields>();
-  const [dotLottie, setDotLottie] = useState<any>(null);
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
   useEffect(() => {
@@ -30,30 +29,29 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
-    playVideo();
-    submitMissionData(data);
+    if (isValid) {
+      submitMissionData(data);
+      setShowAlert(true);
+      reset();
+    }
   };
 
-  const dotLottieRefCallback = (dotLottie: any) => {
-    setDotLottie(dotLottie);
-  };
+  // const dotLottieRefCallback = (dotLottie: any) => {
+  //   setDotLottie(dotLottie);
+  // };
 
   const closeAlert = () => {
     setShowAlert(false);
   };
 
-  const playVideo = () => {
-    if (isValid) {
-      if (dotLottie) {
-        dotLottie.play();
-      }
-      setShowAlert(true);
-    }
-    reset();
-  };
+  // const playVideo = () => {
+  //   if (isValid) {
+  //     if (dotLottie) {
+  //       dotLottie.play();
+  //     }
+  //     setShowAlert(true);
+  //   }
 
-  // const onSubmit = () => {
-  //   reset();
   // };
 
   const currentYear = new Date().getFullYear();
@@ -65,12 +63,12 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
   return (
     <div className="w-full h-full">
       {showAlert && <Alert closeAlert={closeAlert} />}
-      <h2 className="text-2xl text-gray-800 font-extrabold mx-auto md:text-4xl mb-10">
+      <h2 className="text-2xl text-gray-800 font-extrabold mx-auto md:text-4xl mb-10 text-center">
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5]">
           Create a New Mission
         </span>
       </h2>
-      <div className="md:flex justify-evenly sm:block">
+      <div>
         <form
           className="flex flex-col sm:w-full md:w-1/2 text-left"
           autoComplete="false"
@@ -125,13 +123,14 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     message: "Maximum 500 characters",
                   },
                   pattern: {
-                    value: /^[a-zA-Z0-9-_().,&%$=!+'"/:;{} ]*$/g,
-                    message: "Alphanumeric characters only",
+                    value: /^[a-zA-Z0-9-_().,&%$=!+'"/:; ]*$/g,
+                    message:
+                      "Enter alphanumeric and following special characters only -_().,&%$=!+'\"/:;",
                   },
                   validate: (value) => {
                     const regex = /^[a-zA-Z0-9,.-_()&%$=!+'"/:;{} ]*$/g;
                     if (!regex.test(value)) {
-                      return "Alphanumeric characters only";
+                      return "Enter alphanumeric and following special characters only -_().,&%$=!+'\"/:;";
                     }
                     return true;
                   },
@@ -251,11 +250,6 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
             Create mission
           </button>
         </form>
-        <DotLottieReact
-          src="https://lottie.host/f72fc5d8-680a-48da-b20a-73511c63edf2/ncp0RH310H.lottie"
-          dotLottieRefCallback={dotLottieRefCallback}
-          className="w-1/2"
-        />
       </div>
     </div>
   );

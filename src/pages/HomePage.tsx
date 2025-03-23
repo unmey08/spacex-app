@@ -1,5 +1,5 @@
 import { MouseEvent, RefObject } from "react";
-import { MissionState } from "../App";
+import { MissionState } from "../common/types";
 import Filters from "../components/Filters";
 import SortButton from "../components/SortButton";
 import MissionList from "../components/MissionList";

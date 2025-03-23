@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MissionState } from "../App";
+import { MissionState } from "../common/types";
 
 const MissionDetailsPage = () => {
   const { id } = useParams();

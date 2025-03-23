@@ -1,5 +1,5 @@
 import MissionCard from "../components/MissionCard";
-import { MissionState } from "../App";
+import { MissionState } from "../common/types";
 import { Ref } from "react";
 
 type MissionListProps = {
