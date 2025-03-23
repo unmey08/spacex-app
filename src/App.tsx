@@ -35,13 +35,15 @@ function App() {
   const location = useLocation();
 
   const sortMissions = useCallback(
-    (launchData: MissionState[]) => {
+    (direction: string, launchData: MissionState[]) => {
       const sortedList = launchData.sort(
         (mission1: MissionState, mission2: MissionState) => {
           const dateA = new Date(mission1.launch_date_utc).getTime();
           const dateB = new Date(mission2.launch_date_utc).getTime();
 
-          return sortDirection === "asc" ? dateB - dateA : dateA - dateB;
+          return direction === "asc" || direction === "default"
+            ? dateA - dateB
+            : dateB - dateA;
         }
       );
       return sortedList;
@@ -91,13 +93,9 @@ function App() {
             setLaunchData(filteredList);
           }
         } else if (sortDirection === "asc" || sortDirection === "desc") {
-          const missionList = getLocalStorageData().sort(
-            (mission1: MissionState, mission2: MissionState) => {
-              const dateA = new Date(mission1.launch_date_utc).getTime();
-              const dateB = new Date(mission2.launch_date_utc).getTime();
-
-              return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
-            }
+          const missionList = sortMissions(
+            sortDirection,
+            getLocalStorageData()
           );
           loadMoreData(missionList);
         } else {
@@ -121,21 +119,10 @@ function App() {
   const onSearch = (value: string) => {
     if (value === "") {
       const missionList = getLocalStorageData();
-      if (sortDirection === "asc" || sortDirection === "desc") {
-        const sortedList = missionList.sort(
-          (mission1: MissionState, mission2: MissionState) => {
-            const dateA = new Date(mission1.launch_date_utc).getTime();
-            const dateB = new Date(mission2.launch_date_utc).getTime();
-
-            return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
-          }
-        );
-
-        setLaunchData(sortedList.slice(0, 5));
-      } else {
-        loadMoreData(missionList);
-      }
+      const sortedList = sortMissions(sortDirection, missionList);
+      setLaunchData(sortedList.slice(0, 5));
       setFilter(false);
+      setFilteredList([]);
     } else {
       const filteredList = getFilteredData(value);
       setLaunchData(filteredList);
@@ -156,10 +143,10 @@ function App() {
     setSortDirection(direction);
     if (filter) {
       console.log(filteredList, launchData);
-      sortedList = sortMissions(launchData);
+      sortedList = sortMissions(direction, launchData);
       setLaunchData(sortedList);
     } else {
-      sortedList = sortMissions(getLocalStorageData());
+      sortedList = sortMissions(direction, getLocalStorageData());
       const list = sortedList.slice(0, launchData.length);
       setLaunchData(list);
     }
