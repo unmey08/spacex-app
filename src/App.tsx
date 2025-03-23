@@ -61,10 +61,12 @@ function App() {
 
   useEffect(() => {
     if (isLocalStorageDataNull()) {
+      //get data from local storage
       const missionData = getLocalStorageData();
       const data = missionData.slice(0, 5);
       setLaunchData(data);
     } else {
+      // get data from memory
       const rawData = attachImages(spaceXData.data.launches);
       setLocalStorageData(rawData);
       const data = launchData.slice(0, 5);

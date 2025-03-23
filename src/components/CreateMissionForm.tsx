@@ -31,7 +31,6 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     playVideo();
-    console.log("first");
     submitMissionData(data);
   };
 
@@ -90,6 +89,11 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                 placeholder="Enter Mission Name"
                 {...register("missionName", {
                   required: "Mission Name cannot be empty",
+                  pattern: {
+                    value: /^[a-zA-Z0-9-_() ]*$/g,
+                    message:
+                      "Enter alphanumeric and following special characters only -()_",
+                  },
                   validate: (value) => {
                     if (value === "") {
                       return "Mission Name cannot be empty";
@@ -120,6 +124,17 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     value: 500,
                     message: "Maximum 500 characters",
                   },
+                  pattern: {
+                    value: /^[a-zA-Z0-9-_().,&%$=!+'"/:;{} ]*$/g,
+                    message: "Alphanumeric characters only",
+                  },
+                  validate: (value) => {
+                    const regex = /^[a-zA-Z0-9,.-_()&%$=!+'"/:;{} ]*$/g;
+                    if (!regex.test(value)) {
+                      return "Alphanumeric characters only";
+                    }
+                    return true;
+                  },
                 })}
                 className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg  w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium h-24 md:h-48 ${
                   errors.details ? "border-red-400" : ""
@@ -145,6 +160,11 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                 placeholder="Enter Rocket Name"
                 {...register("rocketName", {
                   required: "Rocket Name cannot be empty",
+                  pattern: {
+                    value: /^[a-zA-Z0-9-_() ]*$/g,
+                    message:
+                      "Enter alphanumeric and following special characters only -()_",
+                  },
                   validate: (value) => {
                     if (value === "") {
                       return "Rocket Name cannot be empty";
@@ -207,9 +227,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                 }`}
                 size={1}
               >
-                <option value="Choose a year" selected>
-                  Choose a year
-                </option>
+                <option defaultValue="Choose a year">Choose a year</option>
                 {yearsDropdown.map((year: string) => (
                   <option key={year} value={year}>
                     {year}

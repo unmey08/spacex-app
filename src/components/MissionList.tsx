@@ -31,10 +31,7 @@ const MissionList = ({
           ref={lastElementRef}
           className="text-gray-800 font-semibold text-center"
         >
-          {/* <span>
-          Showing {launchData.length} missions out of{" "}
-          {JSON.parse(localStorage.getItem("data") || "''").length}
-        </span> */}
+          {""}
         </div>
       )}
       {launchData.length === 0 && (
