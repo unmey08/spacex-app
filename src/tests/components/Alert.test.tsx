@@ -17,7 +17,7 @@ describe("Alert Component", () => {
     const successMessage = screen.getByText("Success!");
     expect(successMessage).toBeInTheDocument();
 
-    const description = screen.getByText("New mission created");
+    const description = screen.getByText("New mission created!");
     expect(description).toBeInTheDocument();
 
     // Check for the button
