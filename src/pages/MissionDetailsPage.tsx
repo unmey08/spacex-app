@@ -12,6 +12,7 @@ const MissionDetailsPage = () => {
       (mission: MissionState) => mission.id === id
     )[0];
     setMission(mission);
+    window.scrollTo(0, 0);
   }, [id]);
 
   return (
