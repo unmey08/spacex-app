@@ -18,6 +18,7 @@ const SortButton = ({ sortDirection, handleYearSort }: SortButtonProps) => {
         onClick={handleYearSort}
         className="hover:cursor-pointer"
         aria-label="Sort by year"
+        role="button"
       >
         <span className="mr-2">Sort</span>
         {sortDirection === "default" && <FontAwesomeIcon icon={faSort} />}

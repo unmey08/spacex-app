@@ -17,6 +17,7 @@ const Navbar = ({ pathname }: { pathname: string }) => {
             <button
               className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] hover:cursor-pointer p-2 md:py-2 md:px-4 font-medium duration-150"
               aria-label="Back to missions list"
+              role="button"
             >
               <span>Back to missions list</span>
             </button>
@@ -31,6 +32,7 @@ const Navbar = ({ pathname }: { pathname: string }) => {
             <button
               className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] hover:cursor-pointer p-2 md:py-2 md:px-4 font-medium duration-150 active:bg-gray-100 border border-gray-400 rounded-lg hover:shadow-md"
               aria-label="Create mission"
+              role="button"
             >
               <span>Create mission</span>
             </button>

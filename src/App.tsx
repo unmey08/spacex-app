@@ -142,7 +142,6 @@ function App() {
         : "asc";
     setSortDirection(direction);
     if (filter) {
-      console.log(filteredList, launchData);
       sortedList = sortMissions(direction, launchData);
       setLaunchData(sortedList);
     } else {

@@ -23,6 +23,7 @@ const Hero = ({ scrollIntoView }: { scrollIntoView: () => void }) => {
             className=" py-2 mx-auto text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none w-48 hover:cursor-pointer"
             onClick={scrollIntoView}
             aria-label="See missions"
+            role="button"
           >
             Check out missions
           </button>

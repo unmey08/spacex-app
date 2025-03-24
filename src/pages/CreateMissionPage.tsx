@@ -6,7 +6,7 @@ const CreateMissionPage = ({
   submitMissionData: (data: FormFields) => void;
 }) => {
   return (
-    <div className="h-[100vh] pt-32">
+    <div className="h-screen pt-32">
       <CreateMissionForm submitMissionData={submitMissionData} />
     </div>
   );

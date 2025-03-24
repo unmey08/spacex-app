@@ -33,6 +33,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
       submitMissionData(data);
       setShowAlert(true);
       reset();
+      setTimeout(() => setShowAlert(false), 10000);
     }
   };
 
@@ -61,7 +62,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
   );
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       {showAlert && <Alert closeAlert={closeAlert} />}
       <h2 className="text-2xl text-gray-800 font-extrabold mx-auto md:text-4xl mb-10 text-center">
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5]">
@@ -246,6 +247,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
             className="rounded-lg py-2 px-2 my-2 text-md hover:cursor-pointer w-40 self-center md:self-auto text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 shadow-lg hover:shadow-none disabled:opacity-50 disabled:cursor-not-allowed"
             // disabled={!isValid}
             aria-label="Create mission"
+            role="button"
           >
             Create mission
           </button>

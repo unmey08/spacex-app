@@ -42,10 +42,12 @@ const MissionCard = ({ mission }: MissionCardProps) => {
           type="button"
           to={`missionDetails/${mission.id}`}
           aria-label="View mission details"
+          role="button"
         >
           <button
             className="py-2 px-4 font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none cursor-pointer text-white align-middle md:absolute md:top-[80%]"
             aria-label="Go to mission details"
+            role="button"
           >
             View mission details
           </button>
