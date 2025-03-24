@@ -9,33 +9,33 @@ type AlertProps = {
 const Alert = ({ closeAlert }: AlertProps) => {
   return (
     <div
-      className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative my-4 md:my-20 text-left flex justify-between sm:block"
+      className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded my-4 md:my-20 text-left"
       role="alert"
     >
-      <div className="self-center w-1/2 md:w-full">
-        <strong className="font-bold">Success!</strong>
-        <span className="inline"> New mission created</span>
-      </div>
-      <div className="w-full md:w-1/7 flex justify-end">
-        <Link type="button" to="/" role="button">
-          <button
-            className="py-2 px-4 font-medium bg-green-600 duration-150 hover:bg-green-500  rounded-lg shadow-lg hover:shadow-none cursor-pointer text-white align-middle mr-2 md:mr-8"
-            onClick={closeAlert}
-            aria-label="Go to home page"
-            role="button"
-          >
-            Go to Home Page
-          </button>
-        </Link>
-        <button
-          type="button"
-          role="button"
-          className="hover:cursor-pointer"
-          onClick={closeAlert}
-          aria-label="Close Alert"
-        >
-          <FontAwesomeIcon icon={faClose} size="lg" />
-        </button>
+      <button
+        type="button"
+        role="button"
+        className="hover:cursor-pointer flex justify-end w-full"
+        onClick={closeAlert}
+        aria-label="Close Alert"
+      >
+        <FontAwesomeIcon icon={faClose} size="lg" />
+      </button>
+      <div>
+        <div className="self-center w-full">
+          <strong className="font-bold">Success!</strong>
+          <span className="inline"> New mission created!</span>
+          <Link type="button" to="/" role="button" className="m-0">
+            <button
+              className="md:px-2 font-medium hover:shadow-none cursor-pointer text-green-700 underline align-middle -mt-1 hover:text-gray-900 duration-150"
+              onClick={closeAlert}
+              aria-label="Go to home page"
+              role="button"
+            >
+              Go to Home Page
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
