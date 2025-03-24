@@ -16,6 +16,7 @@ This application is available at https://spacex-app-five.vercel.app/
 - **Vite** - Fast and modern build tool for React.
 - **TypeScript** - For type safety and development.
 - **Tailwind CSS** - For styling the app components.
+- **Vitest** - For testing the components.
 
 ## Installation
 
@@ -29,7 +30,7 @@ This application is available at https://spacex-app-five.vercel.app/
 
    ```bash
    cd spacex-app-challenge
-   npm install
+   npm install --force
    ```
 
 3. Run the project
@@ -37,6 +38,8 @@ This application is available at https://spacex-app-five.vercel.app/
    ```bash
    npm run dev
    ```
+
+On your local machine, visit http://localhost:5173/
 
 ## Usage Guide
 
