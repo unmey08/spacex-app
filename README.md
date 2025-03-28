@@ -2,7 +2,7 @@
 
 This is a React application built using Vite that provides details about all SpaceX launch missions. Users can view mission details, including launch dates, mission names, and other relevant information. Additionally, users can create new mission entries.
 
-This application is available at https://spacex-app-five.vercel.app/
+This application is available at https://spacex-react-app-alpha.vercel.app/
 
 ## Features
 
@@ -23,7 +23,7 @@ This application is available at https://spacex-app-five.vercel.app/
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/unmey08/spacex-app-challenge.git
+   git clone https://github.com/unmey08/spacex-app.git
    ```
 
 2. Navigate into the project directory and install the required dependencies:
