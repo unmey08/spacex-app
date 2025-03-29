@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MissionState } from "../common/types";
 
-const MissionDetailsPage = () => {
+const MissionDetailsPage = ({ toggleMenu }: { toggleMenu: () => void }) => {
   const { id } = useParams();
   const [mission, setMission] = useState<Partial<MissionState>>({});
 
@@ -15,8 +15,10 @@ const MissionDetailsPage = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
+  useEffect(() => toggleMenu(), []);
+
   return (
-    <div className="mb-24">
+    <div className="mb-24 h-full">
       {mission && (
         <section className="pt-32 antialiased text-left h-[100vh]">
           <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0 dark:text-white">

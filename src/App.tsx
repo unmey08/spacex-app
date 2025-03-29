@@ -38,6 +38,8 @@ function App() {
   const [sortDirection, setSortDirection] = useState("default");
   const [filter, setFilter] = useState<boolean>(false);
 
+  const [menu, setMenu] = useState<boolean>(false);
+
   const location = useLocation();
 
   const sortMissions = useCallback(
@@ -144,6 +146,10 @@ function App() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  const toggleMenu = () => {
+    setMenu((value) => !value);
+  };
+
   const onSearch = (value: string) => {
     if (value === "") {
       const missionList = getLocalStorageData();
@@ -199,6 +205,8 @@ function App() {
             pathname={pathname}
             theme={theme}
             handleThemeChange={handleThemeChange}
+            menu={menu}
+            toggleMenu={toggleMenu}
           />
           <Routes>
             <Route
@@ -213,6 +221,7 @@ function App() {
                   onSearch={onSearch}
                   searchText={searchText}
                   filter={filter}
+                  toggleMenu={toggleMenu}
                 />
               }
             />
@@ -222,7 +231,10 @@ function App() {
                 <CreateMissionPage submitMissionData={submitMissionData} />
               }
             />
-            <Route path="missionDetails/:id" element={<MissionDetailsPage />} />
+            <Route
+              path="missionDetails/:id"
+              element={<MissionDetailsPage toggleMenu={toggleMenu} />}
+            />
           </Routes>
         </div>
       </div>

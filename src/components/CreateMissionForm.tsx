@@ -1,14 +1,32 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Alert from "./Alert";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export type FormFields = {
   missionName: string;
-  details: string;
+  details?: string;
   rocketName: string;
   launchYear: string;
+  file: NonNullable<FileList | string | Blob>;
 };
+
+const missionSchema = yup.object().shape({
+  missionName: yup.string().required(),
+  details: yup.string(),
+  rocketName: yup.string().required(),
+  launchYear: yup.string().required(),
+  file: yup
+    .mixed<FileList | string | Blob>()
+    .required()
+    .test("fileSize", "The file size is too large", (value) => {
+      if (value instanceof FileList) {
+        return value[0].size / 1024 <= 256;
+      }
+      return false;
+    }),
+});
 
 export interface CreateMissionFormProps {
   submitMissionData: (data: FormFields) => void;
@@ -21,7 +39,9 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
     setFocus,
     reset,
     formState: { errors, isValid },
-  } = useForm<FormFields>();
+  } = useForm<FormFields>({
+    resolver: yupResolver(missionSchema),
+  });
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
   useEffect(() => {
@@ -30,30 +50,25 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     if (isValid) {
-      submitMissionData(data);
-      setShowAlert(true);
-      reset();
-      setTimeout(() => setShowAlert(false), 10000);
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        data.file = base64String;
+        submitMissionData(data);
+      };
+      if (data.file instanceof FileList) {
+        const file = data.file[0];
+        reader.readAsDataURL(file);
+        setShowAlert(true);
+        reset();
+        setTimeout(() => setShowAlert(false), 10000);
+      }
     }
   };
-
-  // const dotLottieRefCallback = (dotLottie: any) => {
-  //   setDotLottie(dotLottie);
-  // };
 
   const closeAlert = () => {
     setShowAlert(false);
   };
-
-  // const playVideo = () => {
-  //   if (isValid) {
-  //     if (dotLottie) {
-  //       dotLottie.play();
-  //     }
-  //     setShowAlert(true);
-  //   }
-
-  // };
 
   const currentYear = new Date().getFullYear();
   const yearsDropdown: string[] = Array.from(
@@ -136,7 +151,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                   },
                   validate: (value) => {
                     const regex = /^[a-zA-Z0-9,.-_()&%$=!+'"/:;{} ]*$/g;
-                    if (!regex.test(value)) {
+                    if (value && !regex.test(value)) {
                       return "Enter alphanumeric and following special characters only -_().,&%$=!+'\"/:;";
                     }
                     return true;
@@ -258,6 +273,28 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                 </p>
               )}
             </div>
+          </div>
+          <div>
+            <label
+              className="block text-sm after:content-['*'] font-bold dark:text-white"
+              htmlFor="file"
+            >
+              Upload File
+            </label>
+            <input
+              className="w-full border-gray-400 placeholder-gray-500 dark:placeholder-white border rounded-lg md:w-3/4 md:my-2 dark:bg-slate-900 file:bg-gray-200 dark:file:bg-slate-700/65 file:rounded-lg file:rounded-r-none file:p-2 file:border file:bg-clip-border file:dark:text-gray-300 text-gray-800 dark:text-gray-300 file:mr-4"
+              type="file"
+              accept="image/png, image/jpeg"
+              {...register("file")}
+            />
+            <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">
+              PNG or JPG (Max. 256 kB)
+            </p>
+            {errors.file && (
+              <p className="text-red-500 font-bold text-sm" aria-live="polite">
+                {errors?.file?.message}
+              </p>
+            )}
           </div>
           <button
             type="submit"

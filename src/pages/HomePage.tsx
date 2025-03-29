@@ -1,4 +1,4 @@
-import { MouseEvent, RefObject } from "react";
+import { MouseEvent, RefObject, useEffect } from "react";
 import { MissionState } from "../common/types";
 import Filters from "../components/Filters";
 import SortButton from "../components/SortButton";
@@ -14,6 +14,7 @@ type HomePageProps = {
   onSearch: (value: string) => void;
   searchText: string;
   filter: boolean;
+  toggleMenu: () => void;
 };
 
 const HomePage = ({
@@ -25,6 +26,7 @@ const HomePage = ({
   onSearch,
   searchText,
   filter,
+  toggleMenu,
 }: HomePageProps) => {
   const scrollIntoView = (event?: MouseEvent) => {
     event?.preventDefault();
@@ -32,6 +34,8 @@ const HomePage = ({
       behavior: "smooth",
     });
   };
+
+  useEffect(() => toggleMenu(), []);
 
   return (
     <div>

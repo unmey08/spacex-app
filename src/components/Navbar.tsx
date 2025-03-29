@@ -9,6 +9,8 @@ type NavbarProps = {
   pathname: string;
   theme: string;
   handleThemeChange: () => void;
+  menu: boolean;
+  toggleMenu: () => void;
 };
 const Navbar = ({ pathname, theme, handleThemeChange }: NavbarProps) => {
   const [menu, setMenu] = useState<boolean>(false);
@@ -51,7 +53,7 @@ const Navbar = ({ pathname, theme, handleThemeChange }: NavbarProps) => {
               aria-label="Create mission"
             >
               <button
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[#1c12dc] to-[#E114E5] hover:cursor-pointer p-2 md:py-2 md:px-4 font-medium duration-300 active:bg-gray-100 border border-gray-500 rounded-lg hover:shadow-xl dark:border-2 dark:border-gray-500 !dark:active:bg-slate-900"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#1c12dc] to-[#E114E5] hover:cursor-pointer p-2 md:py-2 md:px-4 font-medium duration-300 active:bg-gray-100 border border-gray-500 rounded-lg hover:shadow-xl dark:border-2 !dark:active:bg-slate-900"
                 aria-label="Create mission"
                 role="button"
               >

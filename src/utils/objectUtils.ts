@@ -4,7 +4,6 @@ import {
   spacexRocket1,
   spacexRocket2,
   spacexRocket3,
-  noImage,
 } from "../assets/images/index";
 import { generateRandomString } from "./randomStringUtil";
 import { MissionState } from "../common/types";
@@ -12,6 +11,7 @@ import { getLocalStorageData } from "./localStorageUtils";
 
 export const createMissionObject = (data: FormFields) => {
   const launchDate = new Date(`${data.launchYear}-01-01`).toISOString();
+
   const newMission = {
     mission_name: data.missionName,
     rocket: {
@@ -19,8 +19,8 @@ export const createMissionObject = (data: FormFields) => {
     },
     id: generateRandomString(24),
     image: {
-      name: "No image",
-      src: noImage,
+      name: "Rocket image",
+      src: data.file,
     },
     launch_date_utc: launchDate,
     launch_year: data.launchYear,
@@ -40,7 +40,9 @@ export const attachImages = (launchData: MissionState[]) => {
     { name: "SpaceX Rocket 4", src: spacexRocket4 },
   ];
   launchData.forEach((launch: MissionState) => {
-    launch["image"] = images[Math.floor(Math.random() * images.length)];
+    if (!launch.image) {
+      launch["image"] = images[Math.floor(Math.random() * images.length)];
+    }
   });
   return launchData;
 };

@@ -8,7 +8,7 @@ type ThemeProps = {
 
 const Theme = ({ theme, handleThemeChange }: ThemeProps) => {
   return (
-    <div className="text-slate-800 dark:text-gray-200 self-center flex md:dark:bg-slate-800/90 md:border border-gray-500 px-4 font-medium rounded-lg hover:shadow-xl mr-2">
+    <div className="text-slate-800 dark:text-gray-200 self-center flex  md:border md:dark:border-2 border-gray-500  px-4 font-medium rounded-lg hover:shadow-xl mr-2">
       {theme === "dark" && (
         <button
           type="button"
