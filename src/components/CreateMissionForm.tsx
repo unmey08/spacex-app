@@ -78,7 +78,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
           <div className="my-2">
             <label
               htmlFor="missionName"
-              className="block text-sm after:content-['*'] font-bold"
+              className="block text-sm after:content-['*'] font-bold dark:text-white"
             >
               Mission Name
             </label>
@@ -100,19 +100,25 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     return true;
                   },
                 })}
-                className={`border border-gray-400 placeholder-gray-500 md:my-2 p-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium ${
+                className={`border border-gray-400 placeholder-gray-500 md:my-2 p-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium dark:shadow-gray-900 dark:placeholder-gray-300 dark:text-gray-300 dark:bg-slate-900 ${
                   errors.missionName ? "border-red-400" : ""
                 }`}
               />
               {errors.missionName && (
-                <p className="text-red-500 text-sm" aria-live="polite">
+                <p
+                  className="text-red-500 font-bold text-sm"
+                  aria-live="polite"
+                >
                   {errors.missionName.message}
                 </p>
               )}
             </div>
           </div>
           <div className="my-2">
-            <label htmlFor="details" className="block text-sm font-bold">
+            <label
+              htmlFor="details"
+              className="block text-sm font-bold dark:text-white"
+            >
               Mission Details
             </label>
             <div>
@@ -136,12 +142,15 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     return true;
                   },
                 })}
-                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg  w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium h-24 md:h-48 ${
+                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg  w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium h-24 md:h-48 dark:shadow-gray-900 dark:placeholder-gray-300 dark:text-gray-300 dark:bg-slate-900 ${
                   errors.details ? "border-red-400" : ""
                 }`}
               />
               {errors.details && (
-                <p className="text-red-500 text-sm" aria-live="polite">
+                <p
+                  className="text-red-500 font-bold text-sm"
+                  aria-live="polite"
+                >
                   {errors.details.message}
                 </p>
               )}
@@ -150,7 +159,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
           <div className="my-2">
             <label
               htmlFor="rocketName"
-              className="block text-sm after:content-['*'] font-bold"
+              className="block text-sm after:content-['*'] font-bold dark:text-white"
             >
               Rocket Name
             </label>
@@ -172,12 +181,15 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     return true;
                   },
                 })}
-                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium ${
+                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 font-medium dark:placeholder-gray-300 dark:shadow-gray-900 dark:text-gray-300 dark:bg-slate-900 ${
                   errors.rocketName ? "border-red-400" : ""
                 }`}
               />
               {errors.rocketName && (
-                <p className="text-red-500 text-sm" aria-live="polite">
+                <p
+                  className="text-red-500 font-bold text-sm"
+                  aria-live="polite"
+                >
                   {errors.rocketName.message}
                 </p>
               )}
@@ -186,7 +198,7 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
           <div className="my-2">
             <label
               htmlFor="launchYear"
-              className="block text-sm after:content-['*'] font-bold"
+              className="block text-sm after:content-['*'] font-bold dark:text-white"
             >
               Launch Year
             </label>
@@ -222,12 +234,14 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
                     return true;
                   },
                 })}
-                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 ${
+                className={`border border-gray-400 placeholder-gray-500 p-2 md:my-2 rounded-lg w-full md:w-3/4 shadow-gray-200 shadow-sm text-gray-800 dark:text-gray-300 dark:bg-slate-900 dark:shadow-gray-900 dark:placeholder-white ${
                   errors.launchYear ? "border-red-400" : ""
                 }`}
                 size={1}
               >
-                <option defaultValue="Choose a year">Choose a year</option>
+                <option defaultValue="Choose a year" className="text-white">
+                  Choose a year
+                </option>
                 {yearsDropdown.map((year: string) => (
                   <option key={year} value={year}>
                     {year}
@@ -236,7 +250,10 @@ const CreateMissionForm = ({ submitMissionData }: CreateMissionFormProps) => {
               </select>
 
               {errors.launchYear && (
-                <p className="text-red-500 text-sm" aria-live="polite">
+                <p
+                  className="text-red-500 font-bold text-sm"
+                  aria-live="polite"
+                >
                   {errors.launchYear.message}
                 </p>
               )}

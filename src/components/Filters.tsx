@@ -18,7 +18,7 @@ const Filters = ({ onSearch, searchText }: FilterProps) => {
         <div className="relative">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-400"
+              className="w-4 h-4 text-gray-500 dark:text-white"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -36,7 +36,7 @@ const Filters = ({ onSearch, searchText }: FilterProps) => {
           <input
             type="search"
             placeholder="Search by mission, rocket or year..."
-            className="block  ps-10 text-md border text-gray-800 placeholder-gray-500 border-gray-700 my-2 p-4 rounded-lg w-full shadow-gray-200 shadow-sm bg-white"
+            className="block  ps-10 text-md border text-gray-800 placeholder-gray-500 border-gray-700 my-2 p-4 rounded-lg w-full shadow-gray-200 shadow-sm bg-white dark:bg-slate-900 dark:shadow-black dark:placeholder-white dark:text-gray-300 font-bold"
             value={searchText}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               if (

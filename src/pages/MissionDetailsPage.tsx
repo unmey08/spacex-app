@@ -19,9 +19,9 @@ const MissionDetailsPage = () => {
     <div className="mb-24">
       {mission && (
         <section className="pt-32 antialiased text-left h-[100vh]">
-          <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
+          <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0 dark:text-white">
             <div className="py-5 md:py-16 text-center">
-              <h1 className="font-semibold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5] md:py-5">
+              <h1 className="font-semibold text-3xl text-fuchsia-400 md:py-5">
                 {mission.mission_name} ({mission.launch_year})
               </h1>
               <p className="text-xl md:text-2xl font-bold">
@@ -47,16 +47,18 @@ const MissionDetailsPage = () => {
 
                 <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
-                <p className="mb-2 text-gray-700 font-bold">Details:</p>
+                <p className="mb-2 text-gray-700 font-bold dark:text-slate-300">
+                  Details:
+                </p>
 
-                <p className="mb-6 text-gray-700">
+                <p className="mb-6 text-gray-700 dark:text-slate-300">
                   {mission.details ? mission.details : "No details found"}
                 </p>
                 {mission.links?.article_link !== null && (
                   <a
                     href={mission.links?.article_link}
                     type="button"
-                    className="text-indigo-700 font-medium rounded-lg text-md text-center inline-flex items-center hover:underline hover:cursor-pointer "
+                    className="text-fuchsia-500 font-bold text-md text-center inline-flex items-center hover:underline hover:cursor-pointer "
                     target="_blank"
                   >
                     Link to the article

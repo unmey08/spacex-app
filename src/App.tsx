@@ -29,6 +29,12 @@ function App() {
   const missionListRef = useRef<HTMLElement | null>(null);
   const [searchText, setSearchText] = useState<string>("");
 
+  const darkMode =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [theme, setTheme] = useState(darkMode ? "dark" : "light");
+  const element = document.documentElement;
+
   const [sortDirection, setSortDirection] = useState("default");
   const [filter, setFilter] = useState<boolean>(false);
 
@@ -76,6 +82,24 @@ function App() {
   }, []);
 
   useEffect(() => {
+    switch (theme) {
+      case "dark":
+        element.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        setTheme("dark");
+        break;
+      case "light":
+        element.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        setTheme("light");
+        break;
+      default:
+        localStorage.removeItem("theme");
+        break;
+    }
+  }, [theme]);
+
+  useEffect(() => {
     const options = {
       root: null,
       rootMargin: "50px",
@@ -115,6 +139,10 @@ function App() {
       }
     };
   }, [lastElementRef, location, sortDirection, searchText]);
+
+  const handleThemeChange = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const onSearch = (value: string) => {
     if (value === "") {
@@ -162,9 +190,16 @@ function App() {
   return (
     <>
       <MetaTagComponent />
-      <div className="text-gray-700 absolute bottom-0 left-0 right-0 top-0 background-fade h-fit w-full bg-gray-50">
+      <div
+        className="text-gray-700 absolute bottom-0 left-0 right-0 top-0 background-fade h-fit w-full bg-gray-50 dark:bg-gradient-to-t dark:from-slate-900 dark:via-slate-950 dark:to-slate-950"
+        id="start"
+      >
         <div className="relative max-w-full w-9/10 md:w-4/5 lg:w-3/5 mx-auto sm:px-2 md:px-4 min-h-[calc(100vh-80px)] ">
-          <Navbar pathname={pathname} />
+          <Navbar
+            pathname={pathname}
+            theme={theme}
+            handleThemeChange={handleThemeChange}
+          />
           <Routes>
             <Route
               index

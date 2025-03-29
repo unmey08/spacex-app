@@ -10,7 +10,7 @@ const Hero = ({ scrollIntoView }: { scrollIntoView: () => void }) => {
             SpaceX Launch Missions
           </span>
         </h2>
-        <p className="max-w-2xl mx-auto font-sans">
+        <p className="max-w-2xl mx-auto font-sans dark:text-white">
           SpaceX is an American space technology company headquartered at the
           Starbase development site near Brownsville, Texas. Since its founding
           in 2002, the company has made numerous advancements in rocket

@@ -10,7 +10,7 @@ const MissionCard = ({ mission }: MissionCardProps) => {
   const { details } = mission;
 
   return (
-    <div className="rounded-lg my-10 relative w-full bg-clip-border shadow-xl shadow-gray-300 border overflow-hidden border-gray-400 md:flex md:h-72 lg:h-96">
+    <div className="rounded-lg my-10 relative w-full bg-clip-border shadow-xl shadow-gray-300 border overflow-hidden border-gray-400 md:flex md:h-72 lg:h-96 dark:bg-slate-900 dark:shadow-gray-950 dark:border-slate-600">
       <div className="relative m-0 md:w-2/5 shrink-0 rounded-lg rounded-r-none bg-clip-border h-80 md:h-full">
         <img
           src={mission?.image?.src}
@@ -22,16 +22,16 @@ const MissionCard = ({ mission }: MissionCardProps) => {
         <Link
           to={`missionDetails/${mission.id}`}
           type="button"
-          className="my-2 block font-sans text-xl md:text-2xl font-semibold leading-relaxed tracking-normal text-gray-900 antialiase hover:underline hover:cursor-pointer hover:text-indigo-700"
+          className="my-2 block font-sans text-xl md:text-2xl font-semibold leading-relaxed tracking-normal text-gray-900 antialiase hover:underline hover:cursor-pointer hover:text-indigo-700 dark:text-white"
           aria-label={`Go to mission details ${mission.mission_name}`}
         >
           {mission.mission_name} ({mission.launch_year})
         </Link>
-        <p className="my-4 block font-sans md:text-md md:font-medium leading-snug tracking-normal text-gray-700 antialiased text-lg">
+        <p className="my-4 block font-sans md:text-md md:font-medium leading-snug tracking-normal text-gray-700 antialiased text-lg dark:text-slate-200">
           <span className="font-bold">Rocket Name:</span>{" "}
           {mission.rocket.rocket_name}
         </p>
-        <p className="my-4 block font-sans md:text-md md:font-medium leading-snug tracking-normal text-gray-700 antialiased">
+        <p className="my-4 block font-sans md:text-md md:font-medium leading-snug tracking-normal text-gray-700 antialiased dark:text-slate-400">
           {details
             ? details.length < charLimit
               ? details

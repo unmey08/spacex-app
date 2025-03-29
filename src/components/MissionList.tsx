@@ -18,7 +18,7 @@ const MissionList = ({
   return (
     <div>
       {filter && (
-        <h3 className="text-md mt-10 font-semibold text-gray-800 text-center">
+        <h3 className="text-md mt-10 font-semibold text-gray-800 text-center dark:text-gray-300">
           Showing {launchData.length} results
         </h3>
       )}
@@ -37,7 +37,7 @@ const MissionList = ({
         </div>
       )}
       {totalDataLength > launchData.length ? (
-        <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg">
+        <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg dark:text-gray-300">
           {`${
             launchData.length !== 0
               ? `Showing ${launchData.length} ${
@@ -49,13 +49,13 @@ const MissionList = ({
         </p>
       ) : (
         launchData.length > 0 && (
-          <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg">
+          <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg dark:text-gray-300">
             That's all the missions!
           </p>
         )
       )}
       {launchData.length === 0 && (
-        <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg">
+        <p className="mt-5 mb-5 text-gray-800 font-semibold text-center text-lg dark:text-gray-300">
           No data available
         </p>
       )}
